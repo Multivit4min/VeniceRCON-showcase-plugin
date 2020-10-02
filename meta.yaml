@@ -1,0 +1,24 @@
+#name of the plugin
+name: "Showcase Plugin"
+#description of the plugin
+description: "simple showcase plugin"
+#the version string for the plugin
+version: "1.0.0"
+#backend which the plugin can run under "BF3" and "VU" allowed
+#"BF3" plugins will run under BF3 and VU
+backend: "BF3"
+#plugin entry point
+entry: "index.js"
+#custom features which should be enabled
+features:
+  - router
+vars:
+    #arbitary key to identify the config entry in the config object
+  - name: "message"
+    #meaningful description which can describe a key on the webinterface
+    description: "message which will be sent to every new connected player (%name% sets the playername)"
+    #type of the value which gets used, available types are:
+    #string, boolean, number
+    type: "string"
+    #default value which will be set if there is a null value
+    default: "%name% is joining the server!"
