@@ -1,5 +1,11 @@
 import { Battlefield } from "vu-rcon"
 
+export interface PluginStore {
+  get(key: string): any
+  set(key: string, value: any): void
+  clear(): void
+}
+
 export interface Logger {
   info(message: string): void
   warn(message: string): void
@@ -38,6 +44,7 @@ export interface PluginProps {
   logger: Logger
   dependency: Record<string, any>
   config: Record<string, any>
+  store: PluginStore
 }
 
 export type PluginCallback = (props: PluginProps) => void
