@@ -9,16 +9,59 @@ version: "1.0.0"
 backend: "BF3"
 #plugin entry point
 entry: "index.js"
-#custom features which should be enabled
-features:
-  - router
 vars:
     #arbitary key to identify the config entry in the config object
   - name: "message"
     #meaningful description which can describe a key on the webinterface
     description: "message which will be sent to every new connected player (%name% sets the playername)"
-    #type of the value which gets used, available types are:
-    #string, boolean, number
+    #type of the value which gets used, available types are: string, boolean, number
     type: "string"
+    #allows for a multiline textfield if set to true
+    multiline: false
     #default value which will be set if there is a null value
     default: "%name% is joining the server!"
+    #example for number type default value is 0
+  - name: "numberKey"
+    description: "some arbitary number example"
+    type: "number"
+    #example for boolean type default value is false
+  - name: "booleanKey"
+    description: "some arbitary boolean example"
+    type: "boolean"
+    #example for an array of strings type default value is an empty array
+  - name: "stringsKey"
+    description: "some arbitary strings example"
+    type: "strings"
+    #example for a select field with multiple selectable options
+  - name: "selectKey"
+    description: "some arbitary select/options example"
+    type: "select"
+    options:
+      optionKey1: "description of option key 1"
+      optionKey2: "description of option key 2"
+      optionKey3: "description of option key 3"
+    #example for a nested array type default is an empty array
+  - name: "arrayKey"
+    description: "a nested array type of configurations"
+    type: "array"
+    vars:
+      #this follows the same variable schema as the one above
+      #at this time it is not allowed to have another nested array inside
+      - name: "nestedStringKey"
+        description: "this is a nested string key"
+        type: "string"
+      - name: "nestedNumberKey"
+        description: "this is a nested number key"
+        type: "number"
+  - name: "conditionalKey"
+    description: "this is only viewable on certain condition"
+    type: "string"
+    #this field will only be active if some certain condition comes true
+    conditions:
+      #this will check if the field with name "booleanKey" equals true AND
+      #selectKey has been set to "optionKey2"
+      - booleanKey: true
+        selectKey: "optionKey2"
+      #another array will be handles as an OR condition
+      - booleanKey: false
+        selectKey: "optionKey3"
