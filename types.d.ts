@@ -1,5 +1,9 @@
 import { Battlefield } from "vu-rcon"
 
+export interface PluginEngine {
+  requestPlayerPermissions(guid: string): Promise<string[]>
+}
+
 export interface PluginStore {
   get(key: string): any
   set(key: string, value: any): void
@@ -45,6 +49,7 @@ export interface PluginProps {
   dependency: Record<string, any>
   config: Record<string, any>
   store: PluginStore
+  engine: PluginEngine
 }
 
 export type PluginCallback = (props: PluginProps) => void
